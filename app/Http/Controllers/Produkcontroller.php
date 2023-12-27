@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 //import Model "Post
 use App\Models\produk;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\Controller;
 
 //return type View
 use Illuminate\View\View;
@@ -13,13 +14,18 @@ use Illuminate\Http\Request;
 
 class ProdukController extends Controller
 {
-
+    // Constructor untuk menerapkan midlleware auth
+    // public function __construct()
+    // {
+    //     $this->midlleware('auth');
+    // }
 
     /**
      * indexs
      *
      * @return View
      */
+    // Metode untuk menampilkan daftar produk
     public function index(): View
     {
         //get posts

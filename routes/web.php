@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\UserController; // Perubahan: UserController ditambahkan 's' pada Controllers
 use App\Http\Controllers\ProdukController; // Perubahan: ProdukController ditambahkan 's' pada Controllers
 
@@ -18,6 +19,7 @@ use App\Http\Controllers\ProdukController; // Perubahan: ProdukController ditamb
 Route::get('/', function () {
     return view('welcome');
 });
+
 
 Auth::routes();
 
