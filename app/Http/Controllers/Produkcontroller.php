@@ -13,8 +13,10 @@ use Illuminate\Http\Request;
 
 class ProdukController extends Controller
 {
+
+
     /**
-     * index
+     * indexs
      *
      * @return View
      */
