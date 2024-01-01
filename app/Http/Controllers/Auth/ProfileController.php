@@ -6,17 +6,33 @@ use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
     public function index()
     {
-        $nama = "Tia Amilah";3
-        $alamat = "Bandung"
+        $nama = "Tia Amilah";
+        $alamat = "Kota Bandung";
         $tanggal_lahir = "23 April 2001";
+
         $data_array = array(
             "nama" => array(
-                "Tia Amilah, "Amilah", "Tiaa",
+                "Tia Amilah", "Tia", "Amilah",
             ),
         );
 
-        return view('profile.index', compact('nama', 'alamat', 'tanggal_lahir', 'data_array'));
+        return view('profil', compact('nama', 'alamat', 'tanggal lahir', 'data_array'));
     }
 }

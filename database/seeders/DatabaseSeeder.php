@@ -24,14 +24,14 @@ class DatabaseSeeder extends Seeder
         DB::table('users')->insert([
             [
                 'name' => 'Admin',
-                'email' => 'tiaamilah03@gmail.com',
+                'email' => 'amilahtia08@gmail.com',
                 'password' => Hash::make('12345678'),
                 'Admin' => true
             ],
             [
                 'name' => 'User',
                 'email' => '21030039@stmik-mi.ac.id',
-                'password' => Hash::make('21030039'),
+                'password' => Hash::make('12345678'),
                 'Admin' => false
             ]
         ]);

@@ -2,90 +2,74 @@
 
 namespace App\Http\Controllers;
 
-//import Model "Post
-use App\Models\produk;
-use Illuminate\Support\Facades\Validator;
-use App\Http\Controllers\Controller;
-
-//return type View
-use Illuminate\View\View;
-
 use Illuminate\Http\Request;
+use App\Models\Produk;
+use Illuminate\Support\Facades\Validator;
 
 class ProdukController extends Controller
 {
-    // Constructor untuk menerapkan midlleware auth
-    // public function __construct()
-    // {
-    //     $this->midlleware('auth');
-    // }
-
-    /**
-     * indexs
-     *
-     * @return View
-     */
-    // Metode untuk menampilkan daftar produk
-    public function index(): View
+    function __construct()
     {
-        //get posts
-        $produk = produk::get();
+        $this->middleware('user')->except('destroy');
+    }
 
-        //render view with posts
+    public function index()
+    {
+        $produk = Produk::get();
         return view('produk.index', compact('produk'));
     }
+
     public function create()
     {
+        //Tampilkan halaman create
         return view('produk.create');
     }
+
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'produk'    => 'required|min:6',
-            'price'     => 'required',
-            'stock'     => 'required',
+            'produk'       => 'required|min:6',
+            'price'         => 'required',
+            'stock'         => 'required',
         ], [
-            'produk.required'   => 'Nama Produk harus di isi',
+            'produk.required'  => 'Nama Produk harus di isi.',
         ]);
+
         $validator->validate();
 
-        produk::create([
-            'produk' => $request->produk,
-            'price' => $request->price,
-            'stock' => $request->stock,
+        Produk::create([
+            'produk'      => $request->produk,
+            'price'        => $request->price,
+            'stock'        => $request->stock,
         ]);
 
         return redirect('/produk');
     }
+
     public function edit($id)
     {
-
         $produk = Produk::find($id);
         return view('produk.edit', compact('produk'));
     }
+
+    public function update($id, Request $request)
+    {
+        $produk = Produk::find($id);
+        $produk->produk = $request->produk;
+        $produk->price = $request->price;
+        $produk->stock = $request->stock;
+        $produk->save();
+        return redirect('/produk')->with('success', 'Data produk berhasil diupdate.');
+    }
+
     public function destroy($id)
     {
         $produk = Produk::find($id);
-
-        if (!$produk) {
-            return redirect('/produk')->with('error', 'Produk tidak ditemukan');
+        if ($produk) {
+            $produk->delete();
+            return redirect('/produk')->with('success', 'Data produk berhasil dihapus.');
+        } else {
+            return redirect('/produk')->with('success', 'Data produk tidak ditemukan.');
         }
-
-        $produk->delete();
-
-        return redirect('/produk')->with('success', 'Produk berhasil dihapus');
-    }
-    public function update(Request $request, $id)
-    {
-        $produk = Produk::find($id);
-        $produk->update([
-            'produk' => $request->produk,
-            'price'   => $request->price,
-            'stock'   => $request->stock,
-
-
-        ]);
-
-        return redirect('/produk')->with('success', 'Data produk berhasil diperbaharui');
     }
 }

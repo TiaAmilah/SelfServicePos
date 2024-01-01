@@ -1,41 +1,75 @@
 <html>
-    <title>create produk</title>
+    <title>Create Product</title>
     <body>
-        <h2>create produk</h2>
+        <h2>Create Product</h2>
         <hr>
         @if($errors->any())
             <ul>
                 @foreach($errors->all() as $error)
                     <li>{{ $error }}</li>
-                    @endforeach
+                @endforeach
             </ul>
         @endif
         <form action="{{ URL('produk') }}" method="POST" enctype="multipart/form-data">
             @csrf
-        
-        <table>
+            <table>
                 <tr>
-                    <th>produk</th>
+                    <th>Product</th>
                     <td>
-                        <input type="text" name="produk"required>
+                        <input type="text" name="produk" required>
                     </td>
                 </tr>
-
                 <tr>
-                    <th>price</th>
+                    <th>Price</th>
                     <td>
                         <input type="number" name="price" required>
                     </td>
                 </tr>
-
                 <tr>
-                    <th>stock</th>
+                    <th>Stock</th>
                     <td>
-                        <input type="text" name="stock" required>
+                        <input type="number" name="stock" required>
                     </td>
                 </tr>
-                 </table>
-                 <button type="submit">save</button>
-            </form>
-        </body>
-    </html>
+            </table>
+            <button type="submit">Save</button>
+        </form>
+    </body>
+</html><html>
+    <title>Create Product</title>
+    <body>
+        <h2>Create Product</h2>
+        <hr>
+        @if($errors->any())
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        @endif
+        <form action="{{ URL('product') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <table>
+                <tr>
+                    <th>Product</th>
+                    <td>
+                        <input type="text" name="product" required>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Price</th>
+                    <td>
+                        <input type="number" name="price" required>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Stock</th>
+                    <td>
+                        <input type="number" name="stock" required>
+                    </td>
+                </tr>
+            </table>
+            <button type="submit">Save</button>
+        </form>
+    </body>
+</html>
